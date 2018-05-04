@@ -19,6 +19,5 @@ __used
 __attribute__((section(".modinfo"))) =
 "depends=";
 
-MODULE_ALIAS("i2c:dht12");
 
-MODULE_INFO(srcversion, "8575F9C0EF6BD76CE434969");
+MODULE_INFO(srcversion, "AC81BFE83C51C286E36C274");

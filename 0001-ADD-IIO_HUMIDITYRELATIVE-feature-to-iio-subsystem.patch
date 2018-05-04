@@ -1,0 +1,37 @@
+From 0c6e30914577f2e29a32216a3c4b1399c955c004 Mon Sep 17 00:00:00 2001
+From: Kevin <kevin.shen@quantatw.com>
+Date: Fri, 4 May 2018 15:26:20 +0800
+Subject: ADD IIO_HUMIDITYRELATIVE feature to iio subsystem
+
+---
+ kernel/drivers/iio/industrialio-core.c |    1 +
+ kernel/include/linux/iio/types.h       |    1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/kernel/drivers/iio/industrialio-core.c b/kernel/drivers/iio/industrialio-core.c
+index e145931..ffc39f0 100644
+--- a/kernel/drivers/iio/industrialio-core.c
++++ b/kernel/drivers/iio/industrialio-core.c
+@@ -58,6 +58,7 @@ static const char * const iio_chan_type_name_spec[] = {
+ 	[IIO_INTENSITY] = "intensity",
+ 	[IIO_PROXIMITY] = "proximity",
+ 	[IIO_TEMP] = "temp",
++	[IIO_HUMIDITYRELATIVE] = "humidityrelative",
+ 	[IIO_INCLI] = "incli",
+ 	[IIO_ROT] = "rot",
+ 	[IIO_ANGL] = "angl",
+diff --git a/kernel/include/linux/iio/types.h b/kernel/include/linux/iio/types.h
+index 88bf0f0..a25e19a 100644
+--- a/kernel/include/linux/iio/types.h
++++ b/kernel/include/linux/iio/types.h
+@@ -21,6 +21,7 @@ enum iio_chan_type {
+ 	IIO_INTENSITY,
+ 	IIO_PROXIMITY,
+ 	IIO_TEMP,
++	IIO_HUMIDITYRELATIVE,
+ 	IIO_INCLI,
+ 	IIO_ROT,
+ 	IIO_ANGL,
+-- 
+1.7.9.5
+
