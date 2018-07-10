@@ -17,7 +17,7 @@
 #include <linux/iio/sysfs.h>
 #include <linux/iio/types.h>
 
-#define DRV_VERSION "V1.0"
+#define DRV_VERSION "V2.0"
 
 typedef struct dht12_data_format{
         unsigned char val;
@@ -96,8 +96,8 @@ static int dht12_read_measurement(struct dht12 *data, bool temp) {
         }
 	if(checksum == data_buf[4]) {
 		if(temp) {
-			data->temperature.val = data_buf[0];
-			data->temperature.val2 = data_buf[1];
+			data->temperature.val = data_buf[2];
+			data->temperature.val2 = data_buf[3];
 		}
 		else {
 			data->humidity.val = data_buf[0];
@@ -231,12 +231,17 @@ static int dht12_remove(struct i2c_client *i2c)
         iio_device_free(i2c_get_clientdata(i2c));
 	return 0;
 }
+static const struct i2c_device_id dht12_id[] = {  
+    { "dht12", 0},
+    {}
+};
+MODULE_DEVICE_TABLE(i2c, dht12_id);
 
 static struct of_device_id dht12_of_match[] = {
         { .compatible = "aosong,dht12" },
         {},
 };
-//MODULE_DEVICE_TABLE(of, dht12_of_match);
+MODULE_DEVICE_TABLE(of, dht12_of_match);
 struct i2c_driver dht12_driver = {
     .driver = {
         .name           = "dht12",
@@ -245,10 +250,11 @@ struct i2c_driver dht12_driver = {
     },
     .probe      = dht12_probe,
     .remove     = dht12_remove,
+    .id_table   = dht12_id,
 };
 module_i2c_driver(dht12_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Kevin.Shen");
 MODULE_DESCRIPTION("A i2c-dht12 driver for testing module ");
-MODULE_VERSION("V1.0");
+MODULE_VERSION(DRV_VERSION);
